@@ -5,14 +5,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<title>Maps of DOOM</title>
-		<link rel="icon" type="image/x-icon" href="./favicon.ico" />
 
 		<link rel="stylesheet" href="/reset.css">
 		<style>
 		 body {
-			 font-family: sans-serif;
+			 font-family: monospace;
 			 background: black;
-			 color: white;
+			 color: gray;
 			 padding: 1.5em;
 		 }
 		 select {
@@ -70,7 +69,7 @@
 				 const selected = map_selector[map_selector.selectedIndex];
 				 if (selected.dataset.map) {
 					 map_label.innerText = `Selected map » ${selected.dataset.name} (${selected.dataset.map.toUpperCase()})`;
-					 const map = await fetch(`./maps/${selected.dataset.slug}/${selected.dataset.map}.svg`);
+					 const map = await fetch(`/maps/${selected.dataset.slug}/${selected.dataset.map}.svg`);
 					 const data = await map.text();
 					 map_container.innerHTML = data;
 					 map_container.style.display = "block";
