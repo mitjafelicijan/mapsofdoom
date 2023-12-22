@@ -30,7 +30,7 @@ jobs:
           mkdir public
           cp viewer.html public/index.html
           cp reset.css public/
-          cp favicon.png public/
+          cp favicon.ico public/
           cp -rf maps/ public/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
