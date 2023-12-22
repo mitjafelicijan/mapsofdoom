@@ -3,6 +3,8 @@
 Extracts maps from DOOM's WAD files and converts them into SVG files and then
 creates a simple web interface where you can view them.
 
+## Local usage
+
 ```sh
 python3 -m venv .venv
 source .venv/bin/activate
