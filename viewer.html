@@ -42,11 +42,11 @@
 		<div id="map"></div>
 		
 		<script>
-		 window.addEventListener('load', async () => {
+		 window.addEventListener("load", async () => {
 			 const map_container = document.querySelector('#map');
 			 const map_selector = document.querySelector("#map-index");
 			 const map_label = document.querySelector("#map-label");
-			 const map_request = await fetch("/maps/index.json");
+			 const map_request = await fetch("./maps/index.json");
 			 const map_list = await map_request.json();
 
 			 map_list.forEach(wad => {
@@ -70,7 +70,7 @@
 				 const selected = map_selector[map_selector.selectedIndex];
 				 if (selected.dataset.map) {
 					 map_label.innerText = `Selected map » ${selected.dataset.name} (${selected.dataset.map.toUpperCase()})`;
-					 const map = await fetch(`/maps/${selected.dataset.slug}/${selected.dataset.map}.svg`);
+					 const map = await fetch(`./maps/${selected.dataset.slug}/${selected.dataset.map}.svg`);
 					 const data = await map.text();
 					 map_container.innerHTML = data;
 					 map_container.style.display = "block";

@@ -28,7 +28,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           mkdir public
-          cp viewer.html public/
+          cp viewer.html public/index.html
           cp reset.css public/
           cp favicon.png public/
           cp -rf maps/ public/
