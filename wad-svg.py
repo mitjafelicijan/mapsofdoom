@@ -46,7 +46,7 @@ def map_to_svg(wad, map_name, width, out_dir):
         if line.special:
             color = "lavender"
                 
-        d.append(draw.Line(p1x, p1y, p2x, p2y, stroke=color, stroke_width=2, fill='none'))
+        d.append(draw.Line(p1x, p1y, p2x, p2y, stroke=color, stroke_width=1, fill='none'))
     
     d.save_svg(os.path.join(out_dir, f"{map_name.lower()}.svg"))
     del edit
