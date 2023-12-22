@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Maps of DOOM</title>
+		<link rel="icon" type="image/png" href="/favicon.png" />
+
+		<link rel="stylesheet" href="/reset.css">
+		<style>
+		 body {
+			 font-family: sans-serif;
+			 background: black;
+			 color: white;
+			 padding: 1.5em;
+		 }
+		 select {
+			 padding: 0.5em 1em;
+			 min-width: 20em;
+		 }
+		 h1 { color: red; font-size: x-large; }
+		 #controls {
+			 display: flex;
+			 gap: 2em;
+			 align-items: center;
+			 margin-bottom: 3em;
+		 }
+		 #map { display: none; }
+		 #map-label { text-decoration: underline; }
+		</style>
+	</head>
+	<body>
+		<section id="controls">
+			<h1>Maps of DOOM</h1>
+			<select id="map-index">
+				<option>Select a map</option>
+			</select>
+			<p id="map-label"></p>
+		</section>
+		
+		<div id="map"></div>
+		
+		<script>
+		 window.addEventListener('load', async () => {
+			 const map_container = document.querySelector('#map');
+			 const map_selector = document.querySelector("#map-index");
+			 const map_label = document.querySelector("#map-label");
+			 const map_request = await fetch("/maps/index.json");
+			 const map_list = await map_request.json();
+
+			 map_list.forEach(wad => {
+				 const optgroup = document.createElement("optgroup");
+				 optgroup.label = wad.name;
+
+				 wad.maps.forEach(map => {
+					 const option = document.createElement("option");
+					 option.value = `${wad.slug}/${map}`;
+					 option.innerText = map.toUpperCase();
+					 option.dataset.slug = wad.slug;
+					 option.dataset.name = wad.name;
+					 option.dataset.map = map;
+					 optgroup.appendChild(option);
+				 });
+				 
+				 map_selector.appendChild(optgroup);
+			 });
+
+			 map_selector.addEventListener("change", async () => {
+				 const selected = map_selector[map_selector.selectedIndex];
+				 if (selected.dataset.map) {
+					 map_label.innerText = `Selected map » ${selected.dataset.name} (${selected.dataset.map.toUpperCase()})`;
+					 const map = await fetch(`/maps/${selected.dataset.slug}/${selected.dataset.map}.svg`);
+					 const data = await map.text();
+					 map_container.innerHTML = data;
+					 map_container.style.display = "block";
+				 }
+			 });
+		 });
+		</script>
+	</body>
+</html>
