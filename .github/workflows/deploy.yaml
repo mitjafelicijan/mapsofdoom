@@ -24,7 +24,6 @@ jobs:
         run: |
           mkdir public
           cp viewer.html public/index.html
-          cp reset.css public/
           cp favicon.ico public/
           cp -rf maps/ public/
       - name: Upload artifact
