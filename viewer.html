@@ -69,7 +69,7 @@
 				 const selected = map_selector[map_selector.selectedIndex];
 				 if (selected.dataset.map) {
 					 map_label.innerText = `Selected map » ${selected.dataset.name} (${selected.dataset.map.toUpperCase()})`;
-					 const map = await fetch(`/maps/${selected.dataset.slug}/${selected.dataset.map}.svg`);
+					 const map = await fetch(`./maps/${selected.dataset.slug}/${selected.dataset.map}.svg`);
 					 const data = await map.text();
 					 map_container.innerHTML = data;
 					 map_container.style.display = "block";
